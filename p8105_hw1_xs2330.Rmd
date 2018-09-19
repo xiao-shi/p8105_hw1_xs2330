@@ -1,12 +1,11 @@
 ---
 title: "p8105_hw1_xs2330"
 author: "Xiao Shi"
-date: "September 14, 2018"
+date: "September 18, 2018"
 output: github_document
 ---
-Set up and set seed to ensure reproducibility
-
-```{r setup, include=FALSE}
+**Set up and set seed to ensure reproducibility**
+```{r setup}
 knitr::opts_chunk$set(echo = TRUE)
 set.seed(8105)
 ```
@@ -58,5 +57,13 @@ plot_df = tibble(
 )
 ```
 * the size of the dataset is `r n`
-* the mean of x is `r mean(x)`, and the median of x is `r median(plot_df$x)`
+* the mean of x is `r mean(plot_df$x)`, and the median of x is `r median(plot_df$x)`
 * the proportion of cases for which the logical vector is TRUE is `r mean(plot_df$logical_xy == TRUE)`
+
+**Making ggplot of x and y**
+```{r plotting plot_df}
+ggplot(plot_df, aes(x = x, y = y, color = plot_df$logical_xy)) + geom_point()
+ggsave("scatter_plot_x+y>1.pdf", height = 4, width = 6)
+ggplot(plot_df, aes(x = x, y = y, color = plot_df$logical_to_num_xy)) + geom_point()
+ggplot(plot_df, aes(x = x, y = y, color = plot_df$num_to_factor_xy)) + geom_point()
+```
