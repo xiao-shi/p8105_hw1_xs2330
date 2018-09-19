@@ -10,8 +10,8 @@ Set up and set seed to ensure reproducibility
 knitr::opts_chunk$set(echo = TRUE)
 set.seed(8105)
 ```
-**Problem 1**
-***Creating a data frame comprised with 4 variables
+## Problem 1 ##
+**Creating a data frame comprised with 4 variables**
 ```{r construction, echo=TRUE}
 library(tidyverse)
 ## set seed to ensure reproducibility
@@ -23,31 +23,31 @@ df_problem1 = tibble(
 )
 ```
 
-***Taking the mean of each variable
-```{r mean, message = FALSE}
+**Taking the mean of each variable**
+```{r mean, warning=FALSE}
 df_mean = sapply(df_problem1, mean)
 ```
 Warning messages generated for character variable and factor variable, returning NA
 
-***Convert variables that are not numeric to numeric
-```{r non-numeric to numeric, eval=FALSE, message=FALSE}
+**Convert variables that are not numeric to numeric**
+```{r non-numeric to numeric, eval=FALSE, warning=FALSE}
 vec_logical_converted = as.numeric(df_problem1$vec_logical)
 vec_char_converted = as.numeric(df_problem1$vec_char)
 vec_factor_converted = as.numeric(df_problem1$vec_factor)
 ```
 Warning message generated when converting character variable to numeric format
 
-***Convert variables that are not numeric to numeric with an extra step
-```{r non-numeric to numeric extra, eval=FALSE, message=FALSE}
+**Convert variables that are not numeric to numeric with an extra step**
+```{r non-numeric to numeric extra, eval=FALSE, warning=FALSE}
 vec_char_converted_extra = as.numeric(as.factor(df_problem1$vec_char))
 vec_factor_converted_extra = as.numeric(as.character(df_problem1$vec_factor))
 ```
 Warning meesage generated when converting with an extra step. This time what originally was a character variable converted successfully into numeric through converting to factor first. However, what originally was a factor got converted into character variable before converting to numeric and thus resulted in the warning message.
 
 
-**Problem 2**
-Creating a data frame comprised with variables x and y
-```{r}
+## Problem 2 ##
+**Creating a data frame comprised with variables x and y**
+```{r data construction p2}
 n = 1000
 plot_df = tibble(
   x = rnorm(n = 1000, mean =0, sd = 1),
@@ -57,3 +57,6 @@ plot_df = tibble(
   num_to_factor_xy = as.factor(logical_to_num_xy)
 )
 ```
+* the size of the dataset is `r n`
+* the mean of x is `r mean(x)`, and the median of x is `r median(plot_df$x)`
+* the proportion of cases for which the logical vector is TRUE is `r mean(plot_df$logical_xy == TRUE)`
