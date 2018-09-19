@@ -10,3 +10,38 @@ Set up and set seed to ensure reproducibility
 knitr::opts_chunk$set(echo = TRUE)
 set.seed(8105)
 ```
+**Problem 1**
+Creating a data frame comprised with 4 variables
+```{r construction, echo=TRUE}
+library(tidyverse)
+## set seed to ensure reproducibility
+df_problem1 = tibble(
+  vec_unif = runif(10, min = 0, max = 5),
+  vec_logical = c(vec_unif > 2),
+  vec_char = c("My", "name", "is", "Xiao", "Shi", "and", "I", "am", "a", "sailor"),
+  vec_factor = factor(c("male", "male", "female", "male","male", "male", "male", "female","male", "male"))
+)
+```
+
+Taking the mean of each variable
+```{r mean, message = FALSE}
+df_mean = sapply(df_problem1, mean)
+```
+Warning messages generated for character variable and factor variable, returning NA
+
+Convert variables that are not numeric to numeric
+```{r non-numeric to numeric, eval=FALSE, message=FALSE}
+vec_logical_converted = as.numeric(df_problem1$vec_logical)
+vec_char_converted = as.numeric(df_problem1$vec_char)
+vec_factor_converted = as.numeric(df_problem1$vec_factor)
+```
+Warning message generated when converting character variable to numeric format
+
+Convert variables that are not numeric to numeric with an extra step
+```{r non-numeric to numeric extra, eval=FALSE, message=FALSE}
+vec_char_converted_extra = as.numeric(as.factor(df_problem1$vec_char))
+vec_factor_converted_extra = as.numeric(as.character(df_problem1$vec_factor))
+```
+Warning meesage generated when converting with an extra step. This time what originally was a character variable converted successfully into numeric through converting to factor first. However, what originally was a factor got converted into character variable before converting to numeric and thus resulted in the warning message.
+
+
