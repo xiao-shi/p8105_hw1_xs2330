@@ -26,6 +26,7 @@ df_problem1 = tibble(
 ```{r mean, warning=FALSE}
 df_mean = sapply(df_problem1, mean)
 ```
+The num variable and logical variable got the mean successfully
 Warning messages generated for character variable and factor variable, returning NA
 
 **Convert variables that are not numeric to numeric**
